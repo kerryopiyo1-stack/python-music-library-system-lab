@@ -16,25 +16,41 @@ class Song:
         self.artist = artist
         self.genre = genre
 
-        # Increment the total number of songs
+        # Trigger all class methods upon creation
+        self.add_song_to_count()
+        self.add_to_genres()
+        self.add_to_artists()
+        self.add_to_genre_count()
+        self.add_to_artists_count()
+
+    def add_song_to_count(self):
+        """Increments the value of count by one."""
         Song.count += 1
 
-        # Add genre to the list of unique genres
-        if genre not in Song.genres:
-            Song.genres.append(genre)
+    def add_to_genres(self):
+        """Adds any new genres to a class attribute genres.
+        Ensures there are only unique genres - no duplicates!"""
+        if self.genre not in Song.genres:
+            Song.genres.append(self.genre)
 
-        # Add artist to the list of unique artists
-        if artist not in Song.artists:
-            Song.artists.append(artist)
+    def add_to_artists(self):
+        """Adds any new artists to a class attribute artists.
+        Ensures there are only unique artists - no duplicates!"""
+        if self.artist not in Song.artists:
+            Song.artists.append(self.artist)
 
-        # Update the count of songs per genre
-        if genre in Song.genre_count:
-            Song.genre_count[genre] += 1
+    def add_to_genre_count(self):
+        """Updates class attribute genre_count.
+        Increments genre key by 1, if genre doesn't exist in genre_count add the key and set it to 1."""
+        if self.genre in Song.genre_count:
+            Song.genre_count[self.genre] += 1
         else:
-            Song.genre_count[genre] = 1
+            Song.genre_count[self.genre] = 1
 
-        # Update the count of songs per artist
-        if artist in Song.artist_count:
-            Song.artist_count[artist] += 1
+    def add_to_artists_count(self):
+        """Updates class attribute artists_count.
+        Increments artist key by 1, if artist doesn't exist in artists_count add the key and set it to 1."""
+        if self.artist in Song.artist_count:
+            Song.artist_count[self.artist] += 1
         else:
-            Song.artist_count[artist] = 1
+            Song.artist_count[self.artist] = 1
